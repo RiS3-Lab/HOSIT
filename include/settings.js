@@ -4,16 +4,15 @@
  */
 
 // Show Debug messages in Commandline
-module.exports.DEBUG = true;
+module.exports.DEBUG = false;
 
 // User agent string used in each browser session
-//module.exports.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3253.3 Safari/537.36";
-module.exports.USER_AGENT = "";
+module.exports.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36";
 
 // Width and height of browser window
 module.exports.VIEWPORT = {
-  width: 1366,
-  height: 768
+  width: 1920,
+  height: 1080
 };
 module.exports.WINDOW_SIZE = "" + module.exports.VIEWPORT.width + "," + module.exports.VIEWPORT.height;
 

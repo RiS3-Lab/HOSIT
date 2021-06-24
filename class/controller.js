@@ -159,6 +159,19 @@ class Controller {
     }
   }
 
+  /**
+   * Same as focusFrame() but focuses on the iFrame with the given selector
+   */
+  async focusFrameSelector(selector) {
+    const handle = await this._page.$(selector);
+    if (handle === null) {
+      return false;
+    }
+
+    this._frame = await handle.contentFrame();
+    return this._frame !== null;
+  }
+
 
   /**
    * Types inside the target input element inside the current tab with
@@ -264,6 +277,23 @@ class Controller {
     await Functions.click(this._page, selector, delay, tap, topRight, doTrigger);
   }
 
+  /**
+   * Same as click() but also awaits a page navigation. Useful when you click and button that
+   * takes you to a new url, but don't want to start waiting for navigation once you've already
+   * been taken to the page.
+   * @param selector
+   * @param delay
+   * @param tap
+   * @param topRight
+   * @param doTrigger
+   * @returns {Promise<void>}
+   */
+  async clickAndWait(selector, delay = true, tap = false, topRight = false, doTrigger = false) {
+    await Promise.all([
+      Functions.click(this._page, selector, delay, tap, topRight, doTrigger),
+      this.waitForNavigation()
+    ]);
+  }
 
   /**
    * Click on target element of selected frame with error handling.
@@ -277,6 +307,15 @@ class Controller {
     await Functions.clickFrame(this._frame, selector);
   }
 
+  /**
+   * Same as clickAndWait() but clicks a selector in an iFrame
+   */
+  async clickFrameAndWait(selector) {
+    await Promise.all([
+      Functions.clickFrame(this._frame, selector),
+      this._page.waitForNavigation()
+    ]);
+  }
 
   /**
    * Hover over targeted element
@@ -331,11 +370,12 @@ class Controller {
    * Opens URL in current tab
    *
    * @param  {string} url URL
+   * @param  {Object} options Navigation parameters
    * @return {void}
    * @category async
    */
-  async goto(url) {
-    await this._page.goto(url);
+  async goto(url, options = {}) {
+    await this._page.goto(url, options);
   }
 
   /**
@@ -534,6 +574,15 @@ class Controller {
    */
   getPage() {
     return this._page;
+  }
+
+  /**
+   * getFrame - Returns current selected frame in the page
+   *
+   * @return {frame}  Frame-Object
+   */
+  getFrame() {
+    return this._frame;
   }
 
   /**

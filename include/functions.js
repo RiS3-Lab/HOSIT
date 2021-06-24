@@ -1016,7 +1016,7 @@ class Functions {
     // Set global control variable to check if an action has been already executed
     // before the timeout (for usage in controlStatus function).
     global.ACTION_SINCE_WAIT = true;
-    await page.waitFor(randomTime);
+    await page.waitForTimeout(randomTime);
   }
 
 

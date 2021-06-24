@@ -20,7 +20,7 @@
   "homepage": "https://github.com/das-th-koeln/hosit",
   "repository": "github:das-th-koeln/hosit",
   "bugs": {
-    "url" : "https://github.com/das-th-koeln/hosit/issues"
+    "url": "https://github.com/das-th-koeln/hosit/issues"
   },
   "dependencies": {
     "feedparser": ">=2.2.4",
