@@ -185,7 +185,7 @@ class Functions {
       // Set Puppeteer parameters
       let parameters = {
         headless: false,
-        args: ["--window-size="+VIEWPORT.width+","+VIEWPORT.height]
+        args: ['--start-maximized']
       };
 
       // Add executablePath to parameters, if set
@@ -1111,14 +1111,9 @@ class Functions {
     if (typeof global.logger !== "undefined")
       await global.logger.setError();
 
-    // Close erroneous tab, if globally available
-    if (typeof global.tab !== "undefined") {
-      try {
-        await global.tab.close();
-      } catch (e) {}
-    }
-
-    await process.exit(1);
+    // Old code would close the global tab and exit the process, but
+    // I think the client should handle any errors for this program
+    throw(e)
   }
 
 
