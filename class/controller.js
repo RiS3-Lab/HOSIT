@@ -244,7 +244,7 @@ class Controller {
    * @return {void}
    * @category async
    */
-  async typeTab(page) {
+  async typeTab() {
     await Functions.typeTab(this._page);
   }
 
@@ -254,7 +254,7 @@ class Controller {
    * @return {type}
    * @category async
    */
-  async typeEsc(page) {
+  async typeEsc() {
     await Functions.typeEsc(this._page);
   }
 
