@@ -13,7 +13,7 @@ class SimpleController {
      *
      * @param  {Identity} identity      Identity to use
      * @param  {String} endpoint=null WebSocket-Endpoint
-     * @return {Controller}  Controller-Object
+     * @return {SimpleController}  SimpleController-Object
      */
     constructor(identity, endpoint = null) {
         // Add identity
@@ -104,7 +104,7 @@ class SimpleController {
      * @category async
      */
     async type(selector = "", text) {
-        await this.type(selector, text);
+        await this._page.type(selector, text);
     }
 
 
@@ -524,4 +524,4 @@ class SimpleController {
     }
 }
 
-module.exports = Controller;
+module.exports = SimpleController;
