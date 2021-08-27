@@ -185,7 +185,10 @@ class Functions {
       // Set Puppeteer parameters
       let parameters = {
         headless: false,
-        args: ['--start-maximized']
+        args: [
+            '--start-maximized',
+          '--disable-web-security',
+          '--disable-features=IsolateOrigins,site-per-process']
       };
 
       // Add executablePath to parameters, if set
@@ -350,6 +353,18 @@ class Functions {
 
     // Get element
     const element = await page.$(selector);
+    await this.do_click(page, selector, element, delay, tap, topRight, doTrigger)
+  }
+
+  static async click_js(page, js, delay = true, tap = false, topRight = false, doTrigger = false) {
+    await this.bringToFront(page);
+
+    // Get element
+    const element = await (await page.evaluateHandle(js)).asElement();
+    await this.do_click(page, js, element, delay, tap, topRight, doTrigger)
+  }
+
+  static async do_click(page, selector, element, delay = true, tap = false, topRight = false, doTrigger = false) {
     const screenshot = await this.getScreenshot(element);
     var href = await this.getHref(page, selector);
     if (typeof href !== "undefined")

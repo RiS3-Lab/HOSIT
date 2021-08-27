@@ -277,6 +277,10 @@ class Controller {
     await Functions.click(this._page, selector, delay, tap, topRight, doTrigger);
   }
 
+  async click_js(selector, delay = true, tap = false, topRight = false, doTrigger = false) {
+    await Functions.click_js(this._page, selector, delay, tap, topRight, doTrigger);
+  }
+
   /**
    * Same as click() but also awaits a page navigation. Useful when you click and button that
    * takes you to a new url, but don't want to start waiting for navigation once you've already

@@ -8,6 +8,7 @@ module.exports.DEBUG = false;
 
 // User agent string used in each browser session
 module.exports.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36";
+//module.exports.USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0"
 
 // Width and height of browser window
 module.exports.VIEWPORT = {
