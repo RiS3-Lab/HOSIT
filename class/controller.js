@@ -258,6 +258,14 @@ class Controller {
     await Functions.typeEsc(this._page);
   }
 
+  async find_js(selector) {
+    await this._page.bringToFront();
+
+    // Get element
+    const element = await (await this._page.evaluateHandle(selector)).asElement();
+    return element;
+  }
+
   /**
    * Click on target element with random deviation around the click position
    * and error handling. Every click is saved as a screenshot.
@@ -403,6 +411,10 @@ class Controller {
    */
   async waitForNavigation() {
     await this._page.waitForNavigation();
+  }
+
+  async screenshot(fn) {
+    await this._page.screenshot({ path: fn });
   }
 
   /**

@@ -54,7 +54,6 @@ class SimpleController {
         this._browser = init.browser;
     }
 
-
     /**
      * Searches for inline frame with given URL start in the current
      * tab and focuses it for following events (typeFrame or clickFrame)
@@ -155,6 +154,11 @@ class SimpleController {
         await Functions.typeEsc(this._page);
     }
 
+    async find_js(selector) {
+        const element = await (await this._page.evaluateHandle(selector)).asElement();
+        return element;
+    }
+
     /**
      * Click on target element with random deviation around the click position
      * and error handling. Every click is saved as a screenshot.
@@ -172,6 +176,11 @@ class SimpleController {
      */
     async click(selector, delay = true, tap = false, topRight = false, doTrigger = false) {
         await this._page.click(selector);
+    }
+
+    async click_js(selector) {
+        const element = await (await this._page.evaluateHandle(selector)).asElement();
+        await element.click();
     }
 
     /**
@@ -297,6 +306,10 @@ class SimpleController {
      */
     async waitForNavigation() {
         await this._page.waitForNavigation();
+    }
+
+    async screenshot(fn) {
+        await this._page.screenshot({ path: fn });
     }
 
     /**
